@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
 
 /**
+ * @property int $id
  * @property string $name
  * @property string $email
  * @property string $password
