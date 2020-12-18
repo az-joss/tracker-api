@@ -44,7 +44,8 @@ return [
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
-            'hash' => false,
+            'input_key' => 'access_token',
+            'storage_key' => 'access_token',
         ],
     ],
 
@@ -68,7 +69,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => \App\Models\User::class,
         ],
 
         // 'users' => [

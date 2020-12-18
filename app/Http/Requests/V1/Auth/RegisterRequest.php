@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\V1\Auth;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class RegisterRequest extends FormRequest
@@ -13,7 +14,7 @@ class RegisterRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,9 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|string:200',
+            'email' => 'required|email|unique:' . User::class,
+            'password' => 'required|string|min:6'
         ];
     }
 }

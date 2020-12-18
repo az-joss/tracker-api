@@ -15,26 +15,31 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group([
-    'prefix' => 'auth'
+    'prefix' => '/auth',
 ], function() {
-    Route::post('register', 'AuthController@register');
-    Route::post('login', 'AuthController@login');
-});
-
-Route::middleware('auth:api')->get('/me', function (Request $request) {
-    return $request->user();
+    Route::post('/register', 'AuthController@register');
+    Route::post('/login', 'AuthController@login');
 });
 
 Route::group([
-    'prefix' => 'task',
+    'prefix' => '/user',
+    'middleware' => ['auth:api']
+], function() {
+    Route::get('/me', function(Request $request) {
+        return $request->user();
+    });
+});
+
+Route::group([
+    'prefix' => '/task',
     'middleware' => ['auth:api']
 ], function() {
     Route::get('/', 'TaskController@index');
     Route::post('/', 'TaskController@store');
     Route::post('/import', 'TaskController@import');
 
-    Route::get('/{Task}', 'TaskController@show');
-    Route::put('/{Task}', 'TaskController@update');
-    Route::delete('/{Task}', 'TaskController@destroy');
+    Route::get('/{task}', 'TaskController@show');
+    Route::put('/{task}', 'TaskController@update');
+    Route::delete('/{task}', 'TaskController@destroy');
 });
 

@@ -175,6 +175,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * Source Service Providers
+         */
+        Tracker\Auth\AuthServiceProvider::class
     ],
 
     /*
